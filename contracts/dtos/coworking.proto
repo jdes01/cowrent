@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package workspace_dt;
+
+option go_package = "github.com/jdes01/cowrent/api/contracts/dtos";
+
+
+message WorkspaceDTO {
+    string UUID = 1;
+    string name = 2;
+    int32 seats = 3;
+  }
+
+message CoworkingDTO {
+    string UUID = 1;
+    string name = 2;
+    repeated string imagePath = 3;
+    repeated WorkspaceDTO workspaces = 4;
+}

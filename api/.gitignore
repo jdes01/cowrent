@@ -1,0 +1,41 @@
+# Compiled files
+*.exe
+*.out
+
+# Binary files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+
+# Dependency directories
+/vendor/
+
+# Logs and temporary files
+/log/
+/tmp/
+__debug*
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment variables file
+.env
+
+# macOS specific files
+.DS_Store
+
+# Compiled Go files
+*.test
+*.prof
+
+# Configurations
+air.toml
+
+# Ignore binary
+/bin/
+
+air
+api

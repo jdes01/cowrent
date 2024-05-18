@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package add_image_to_coworking;
+
+option go_package = "github.com/jdes01/cowrent/api/contracts/responses";
+
+
+message AddImageToCoworkingResponse {
+    string image_path = 1;
+  }

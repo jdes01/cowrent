@@ -1,0 +1,133 @@
+version: "3"
+
+services:
+
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+      - "127.0.0.11:53:53"
+      - "127.0.0.11:53:53/udp"
+    environment:
+      - SERVICES=s3
+    volumes:
+      - "localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - cowrent-network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    env_file:
+    - ./api/.env
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST:-postgres}
+      POSTGRES_DB: ${DATABASE_DB:-yourdb}
+      POSTGRES_USER: ${DATABASE_USER:-username}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - cowrent-network
+
+  api:
+    container_name: api
+    build:
+      context: ./api
+    ports:
+      - 8080:8080
+      - 4000:4000
+      - 2345:2345
+    restart: always
+    volumes:
+      - ./api:/app
+    depends_on:
+      - postgres
+      - loki
+      - localstack
+    networks:
+      - cowrent-network
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-testing}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-testing}
+      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://localstack:4566}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-eu-south-1}
+    dns:
+      - 127.0.0.11:53
+    extra_hosts:
+      - "coworking-images.localstack:172.17.0.1"
+
+
+  grafana:
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
+        apiVersion: 1
+        datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          orgId: 1
+          url: http://loki:3100
+          basicAuth: false
+          isDefault: true
+          version: 1
+          editable: false
+        EOF
+        /run.sh
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - cowrent-network
+
+  loki:
+    container_name: loki
+    image: grafana/loki:2.9.2
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
+      - loki-data:/loki
+    command:
+      - -config.file=/etc/loki/local-config.yaml
+      - -config.expand-env=true
+    networks:
+      - cowrent-network
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=exemplar-storage
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus.yaml
+
+
+networks:
+  cowrent-network:
+
+volumes:
+  postgres-data:
+  loki-data:
+  grafana-data:
+  localstack-data:

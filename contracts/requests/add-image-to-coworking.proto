@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package add_image_to_coworking;
+
+option go_package = "github.com/jdes01/cowrent/api/contracts/requests";
+
+message AddImageToCoworkingRequest {
+  string coworking_uuid = 1;
+  bytes image_data = 2;
+  string image_filename = 3;
+}
