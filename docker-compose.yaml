@@ -8,8 +8,6 @@ services:
     ports:
       - "4566:4566"
       - "4571:4571"
-      - "127.0.0.11:53:53"
-      - "127.0.0.11:53:53/udp"
     environment:
       - SERVICES=s3
     volumes:
@@ -59,11 +57,8 @@ services:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-testing}
       AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://localstack:4566}
       AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-eu-south-1}
-    dns:
-      - 127.0.0.11:53
     extra_hosts:
       - "coworking-images.localstack:172.17.0.1"
-
 
   grafana:
     environment:

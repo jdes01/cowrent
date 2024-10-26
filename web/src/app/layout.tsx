@@ -28,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProperties) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <div className="mt-4 flex min-h-[calc(100vh-185px)] flex-col">
             <div className="container mx-auto flex-grow py-5">{children}</div>
           </div>

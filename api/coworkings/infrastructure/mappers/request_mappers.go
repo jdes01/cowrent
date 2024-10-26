@@ -13,6 +13,7 @@ import (
 func AddImageToCoworkingMapper(context *gin.Context) result.Result[*requests.AddImageToCoworkingRequest] {
 
 	file, err := context.FormFile("file")
+
 	if err != nil {
 		logger.GetLogger().Info("1", err.Error())
 

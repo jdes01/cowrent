@@ -3,7 +3,6 @@ package application
 import (
 	"api/contracts/requests"
 	domain "api/coworkings/domain"
-	"api/utils/logger"
 	r "api/utils/result"
 )
 
@@ -17,19 +16,18 @@ func NewCreateCoworkingHandler(repository domain.CoworkingRepository) *CreateCow
 
 func (handler *CreateCoworkingHandler) Execute(request *requests.CreateCoworkingRequest) r.Result[domain.Coworking] {
 
-	coworkingResult := CreateCoworkingRequestMapper(request)
-	if coworkingResult.IsErr() {
-		return r.NewResult(domain.Coworking{}, coworkingResult.Err)
+	if coworkingResult := CreateCoworkingRequestMapper(request); coworkingResult.IsErr() {
+		return coworkingResult
+
+	} else {
+		go func(coworking *domain.Coworking) {
+			handler.Repository.
+				SaveCoworking(coworking).
+				LogThisIfErr("Something went wrong saving user", coworking).
+				LogThisIfOk("Coworking was saved successfully!")
+
+		}(&coworkingResult.Ok)
+
+		return coworkingResult
 	}
-
-	go func(coworking *domain.Coworking) {
-		if repositoryResult := handler.Repository.SaveCoworking(coworking); repositoryResult.IsErr() {
-			logger.GetLogger().Error("Something went wrong saving user", coworking)
-		} else {
-			logger.GetLogger().Info("Coworking was saved successfully!", nil)
-		}
-
-	}(&coworkingResult.Ok)
-
-	return coworkingResult
 }

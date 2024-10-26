@@ -12,6 +12,8 @@ interface CoworkingCardProperties {
 export function CoworkingCard(properties: CoworkingCardProperties) {
   const { coworking } = properties;
 
+  const coworkingImagePath = `http://localhost:4566/${coworking.imagePath[0]}`;
+
   return (
     <>
       <Card className="group max-w-[320px] space-y-4 border-t-4 p-4">
@@ -21,7 +23,7 @@ export function CoworkingCard(properties: CoworkingCardProperties) {
         </CardHeader>
         <CardContent>
           <div className="grid w-full items-center gap-4">
-            <Image src={`http://localhost:4566/${coworking.imagePath[0]}`} width={500} height={500} alt="Picture of the author" />
+            <Image src={coworkingImagePath} width={500} height={500} alt="Picture of the author" />
             <ScrollArea className="h-20 w-60 rounded-md">
               <div className="p-4 ">
                 <h4 className="mb-4 text-sm font-medium leading-none">Workspaces:</h4>

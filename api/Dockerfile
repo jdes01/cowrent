@@ -1,8 +1,8 @@
-FROM golang:1.22-alpine
+FROM golang:1.23-alpine
 
 WORKDIR /app
 
-RUN go install github.com/cosmtrek/air@latest
+RUN go install github.com/air-verse/air@latest
 
 COPY go.mod go.sum ./
 
