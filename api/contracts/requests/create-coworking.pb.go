@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreateWorkspaceRequest struct {
+type CreateCoworkingRequestWorkspace struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -29,8 +29,8 @@ type CreateWorkspaceRequest struct {
 	Seats int32  `protobuf:"varint,2,opt,name=seats,proto3" json:"seats,omitempty"`
 }
 
-func (x *CreateWorkspaceRequest) Reset() {
-	*x = CreateWorkspaceRequest{}
+func (x *CreateCoworkingRequestWorkspace) Reset() {
+	*x = CreateCoworkingRequestWorkspace{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_contracts_requests_create_coworking_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -38,13 +38,13 @@ func (x *CreateWorkspaceRequest) Reset() {
 	}
 }
 
-func (x *CreateWorkspaceRequest) String() string {
+func (x *CreateCoworkingRequestWorkspace) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateWorkspaceRequest) ProtoMessage() {}
+func (*CreateCoworkingRequestWorkspace) ProtoMessage() {}
 
-func (x *CreateWorkspaceRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateCoworkingRequestWorkspace) ProtoReflect() protoreflect.Message {
 	mi := &file_contracts_requests_create_coworking_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,19 +56,19 @@ func (x *CreateWorkspaceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateWorkspaceRequest.ProtoReflect.Descriptor instead.
-func (*CreateWorkspaceRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateCoworkingRequestWorkspace.ProtoReflect.Descriptor instead.
+func (*CreateCoworkingRequestWorkspace) Descriptor() ([]byte, []int) {
 	return file_contracts_requests_create_coworking_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateWorkspaceRequest) GetName() string {
+func (x *CreateCoworkingRequestWorkspace) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CreateWorkspaceRequest) GetSeats() int32 {
+func (x *CreateCoworkingRequestWorkspace) GetSeats() int32 {
 	if x != nil {
 		return x.Seats
 	}
@@ -81,7 +81,7 @@ type CreateCoworkingRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	Name       string                    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Workspaces []*CreateWorkspaceRequest `protobuf:"bytes,2,rep,name=workspaces,proto3" json:"workspaces,omitempty"`
+	Workspaces []*CreateCoworkingRequestWorkspace `protobuf:"bytes,2,rep,name=workspaces,proto3" json:"workspaces,omitempty"`
 }
 
 func (x *CreateCoworkingRequest) Reset() {
@@ -123,7 +123,7 @@ func (x *CreateCoworkingRequest) GetName() string {
 	return ""
 }
 
-func (x *CreateCoworkingRequest) GetWorkspaces() []*CreateWorkspaceRequest {
+func (x *CreateCoworkingRequest) GetWorkspaces() []*CreateCoworkingRequestWorkspace {
 	if x != nil {
 		return x.Workspaces
 	}
@@ -170,11 +170,11 @@ func file_contracts_requests_create_coworking_proto_rawDescGZIP() []byte {
 
 var file_contracts_requests_create_coworking_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_contracts_requests_create_coworking_proto_goTypes = []interface{}{
-	(*CreateWorkspaceRequest)(nil), // 0: create_workspace_request.CreateWorkspaceRequest
+	(*CreateCoworkingRequestWorkspace)(nil), // 0: create_workspace_request.CreateCoworkingRequestWorkspace
 	(*CreateCoworkingRequest)(nil), // 1: create_workspace_request.CreateCoworkingRequest
 }
 var file_contracts_requests_create_coworking_proto_depIdxs = []int32{
-	0, // 0: create_workspace_request.CreateCoworkingRequest.workspaces:type_name -> create_workspace_request.CreateWorkspaceRequest
+	0, // 0: create_workspace_request.CreateCoworkingRequest.workspaces:type_name -> create_workspace_request.CreateCoworkingRequestWorkspace
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -189,7 +189,7 @@ func file_contracts_requests_create_coworking_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_contracts_requests_create_coworking_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateWorkspaceRequest); i {
+			switch v := v.(*CreateCoworkingRequestWorkspace); i {
 			case 0:
 				return &v.state
 			case 1:

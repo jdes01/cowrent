@@ -4,12 +4,12 @@ package create_workspace_request;
 
 option go_package = "github.com/jdes01/cowrent/api/contracts/requests";
 
-message CreateWorkspaceRequest {
+message CreateCoworkingRequestWorkspace {
     string name = 1;
     int32 seats = 2;
   }
 
 message CreateCoworkingRequest {
     string name = 1;
-    repeated CreateWorkspaceRequest workspaces = 2;
+    repeated CreateCoworkingRequestWorkspace workspaces = 2;
   }

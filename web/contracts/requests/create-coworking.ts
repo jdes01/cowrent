@@ -9,22 +9,22 @@ import * as _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "create_workspace_request";
 
-export interface CreateWorkspaceRequest {
+export interface CreateCoworkingRequestWorkspace {
   name: string;
   seats: number;
 }
 
 export interface CreateCoworkingRequest {
   name: string;
-  workspaces: CreateWorkspaceRequest[];
+  workspaces: CreateCoworkingRequestWorkspace[];
 }
 
-function createBaseCreateWorkspaceRequest(): CreateWorkspaceRequest {
+function createBaseCreateCoworkingRequestWorkspace(): CreateCoworkingRequestWorkspace {
   return { name: "", seats: 0 };
 }
 
-export const CreateWorkspaceRequest = {
-  encode(message: CreateWorkspaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const CreateCoworkingRequestWorkspace = {
+  encode(message: CreateCoworkingRequestWorkspace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -34,10 +34,10 @@ export const CreateWorkspaceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateWorkspaceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateCoworkingRequestWorkspace {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateWorkspaceRequest();
+    const message = createBaseCreateCoworkingRequestWorkspace();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -64,14 +64,14 @@ export const CreateWorkspaceRequest = {
     return message;
   },
 
-  fromJSON(object: any): CreateWorkspaceRequest {
+  fromJSON(object: any): CreateCoworkingRequestWorkspace {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       seats: isSet(object.seats) ? globalThis.Number(object.seats) : 0,
     };
   },
 
-  toJSON(message: CreateWorkspaceRequest): unknown {
+  toJSON(message: CreateCoworkingRequestWorkspace): unknown {
     const obj: any = {};
     if (message.name !== "") {
       obj.name = message.name;
@@ -82,11 +82,11 @@ export const CreateWorkspaceRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreateWorkspaceRequest>, I>>(base?: I): CreateWorkspaceRequest {
-    return CreateWorkspaceRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<CreateCoworkingRequestWorkspace>, I>>(base?: I): CreateCoworkingRequestWorkspace {
+    return CreateCoworkingRequestWorkspace.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreateWorkspaceRequest>, I>>(object: I): CreateWorkspaceRequest {
-    const message = createBaseCreateWorkspaceRequest();
+  fromPartial<I extends Exact<DeepPartial<CreateCoworkingRequestWorkspace>, I>>(object: I): CreateCoworkingRequestWorkspace {
+    const message = createBaseCreateCoworkingRequestWorkspace();
     message.name = object.name ?? "";
     message.seats = object.seats ?? 0;
     return message;
@@ -103,7 +103,7 @@ export const CreateCoworkingRequest = {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.workspaces) {
-      CreateWorkspaceRequest.encode(v!, writer.uint32(18).fork()).ldelim();
+      CreateCoworkingRequestWorkspace.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -127,7 +127,7 @@ export const CreateCoworkingRequest = {
             break;
           }
 
-          message.workspaces.push(CreateWorkspaceRequest.decode(reader, reader.uint32()));
+          message.workspaces.push(CreateCoworkingRequestWorkspace.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -142,7 +142,7 @@ export const CreateCoworkingRequest = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       workspaces: globalThis.Array.isArray(object?.workspaces)
-        ? object.workspaces.map((e: any) => CreateWorkspaceRequest.fromJSON(e))
+        ? object.workspaces.map((e: any) => CreateCoworkingRequestWorkspace.fromJSON(e))
         : [],
     };
   },
@@ -153,7 +153,7 @@ export const CreateCoworkingRequest = {
       obj.name = message.name;
     }
     if (message.workspaces?.length) {
-      obj.workspaces = message.workspaces.map((e) => CreateWorkspaceRequest.toJSON(e));
+      obj.workspaces = message.workspaces.map((e) => CreateCoworkingRequestWorkspace.toJSON(e));
     }
     return obj;
   },
@@ -164,7 +164,7 @@ export const CreateCoworkingRequest = {
   fromPartial<I extends Exact<DeepPartial<CreateCoworkingRequest>, I>>(object: I): CreateCoworkingRequest {
     const message = createBaseCreateCoworkingRequest();
     message.name = object.name ?? "";
-    message.workspaces = object.workspaces?.map((e) => CreateWorkspaceRequest.fromPartial(e)) || [];
+    message.workspaces = object.workspaces?.map((e) => CreateCoworkingRequestWorkspace.fromPartial(e)) || [];
     return message;
   },
 };

@@ -15,7 +15,7 @@ func CreateCoworkingRequestMapper(request *requests.CreateCoworkingRequest) r.Re
 	return domain.CreateNewCoworking(request.Name, workspacesResult.Ok)
 }
 
-func extractWorkspaces(requests []*requests.CreateWorkspaceRequest) r.Result[[]domain.Workspace] {
+func extractWorkspaces(requests []*requests.CreateCoworkingRequestWorkspace) r.Result[[]domain.Workspace] {
 	workspaces := make([]domain.Workspace, 0)
 	for _, request := range requests {
 		workspaceResult := domain.CreateNewWorkspace(request.Name, int(request.Seats))

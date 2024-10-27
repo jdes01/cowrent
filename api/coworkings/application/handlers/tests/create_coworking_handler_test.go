@@ -17,27 +17,27 @@ import (
 func TestCreateCoworkingHandler_Execute(t *testing.T) {
 
 	type WorkspaceTest struct {
-		Workspace    requests.CreateWorkspaceRequest
+		Workspace    requests.CreateCoworkingRequestWorkspace
 		ErrorMessage string
 	}
 
 	TESTING_WORKSPACE_REQUEST_LIST := []WorkspaceTest{
 		{
-			Workspace: requests.CreateWorkspaceRequest{
+			Workspace: requests.CreateCoworkingRequestWorkspace{
 				Name:  "",
 				Seats: 5,
 			},
 			ErrorMessage: "Workspace name cannot be empty",
 		},
 		{
-			Workspace: requests.CreateWorkspaceRequest{
+			Workspace: requests.CreateCoworkingRequestWorkspace{
 				Name:  "Workspace 2",
 				Seats: 0,
 			},
 			ErrorMessage: "Workspace gotta have seats",
 		},
 		{
-			Workspace: requests.CreateWorkspaceRequest{
+			Workspace: requests.CreateCoworkingRequestWorkspace{
 				Name:  "Workspace 2",
 				Seats: -1,
 			},
@@ -46,7 +46,7 @@ func TestCreateCoworkingHandler_Execute(t *testing.T) {
 	}
 
 	EMPTY_WORKSPACE_LIST := make([]domain.Workspace, 0)
-	EMPTY_WORKSPACE_REQUEST_LIST := make([]*requests.CreateWorkspaceRequest, 0)
+	EMPTY_WORKSPACE_REQUEST_LIST := make([]*requests.CreateCoworkingRequestWorkspace, 0)
 
 	type TestArgs struct {
 		TestName         string
@@ -73,7 +73,7 @@ func TestCreateCoworkingHandler_Execute(t *testing.T) {
 	for _, testing_workspace_request := range TESTING_WORKSPACE_REQUEST_LIST {
 		testCases = append(testCases, TestArgs{
 			TestName:         "Possible coworking list",
-			Request:          requests.CreateCoworkingRequest{Name: "Sample Coworking 1", Workspaces: []*requests.CreateWorkspaceRequest{&testing_workspace_request.Workspace}},
+			Request:          requests.CreateCoworkingRequest{Name: "Sample Coworking 1", Workspaces: []*requests.CreateCoworkingRequestWorkspace{&testing_workspace_request.Workspace}},
 			RepositoryReturn: r.NewResult(domain.Coworking{}, nil),
 			ExpectedResponse: r.NewResult(domain.NewCoworking(domain.CoworkingName{}, EMPTY_WORKSPACE_LIST), errors.New(testing_workspace_request.ErrorMessage)),
 		})

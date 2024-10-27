@@ -12,3 +12,6 @@ upload:
 		IMAGE_PATH="$(IMAGE_PATH)"; \
 	fi; \
 	curl -X POST "$(BASE_URL)/api/coworking/$$UUID/image" -F "file=@$$IMAGE_PATH"
+
+create-coworking:
+	python3 ./scripts/create-coworking.py
