@@ -14,6 +14,7 @@ type CoworkingsService struct {
 	AddImageToCoworkingHandler handlers.AddImageToCoworkingHandler
 	CreateCoworkingHandler     handlers.CreateCoworkingHandler
 	GetCoworkingsHandler       handlers.GetCoworkingsHandler
+	AddWorkspaceToCoworkingHandler handlers.AddWorkspaceToCoworkingHandler
 }
 
 func New(repository domain.CoworkingRepository, fileUploader domain.FileUploader) *CoworkingsService {
@@ -21,6 +22,7 @@ func New(repository domain.CoworkingRepository, fileUploader domain.FileUploader
 		AddImageToCoworkingHandler: *handlers.NewAddImageToCoworkingHandler(repository, fileUploader),
 		CreateCoworkingHandler:     *handlers.NewCreateCoworkingHandler(repository),
 		GetCoworkingsHandler:       *handlers.NewGetCoworkingsHandler(repository),
+		AddWorkspaceToCoworkingHandler: *handlers.NewAddWorkspaceToCoworkingHandler(repository),
 	}
 }
 
@@ -48,5 +50,14 @@ func (service *CoworkingsService) AddImageToCoworkingService(request *requests.A
 		return r.NewResult(responses.AddImageToCoworkingResponse{}, newImageResult.Err)
 	default:
 		return r.NewResult(responses.AddImageToCoworkingResponse{ImagePath: newImageResult.Ok.URL}, nil)
+	}
+}
+
+func (service *CoworkingsService) AddWorkspaceToCoworkingService(request *requests.AddWorkspaceToCoworkingRequest) r.Result[responses.AddWorkspaceToCoworkingResponse] {
+	switch coworkingCreatedResult := service.AddWorkspaceToCoworkingHandler.Execute(request); {
+	case coworkingCreatedResult.IsErr():
+		return r.NewResult(responses.AddWorkspaceToCoworkingResponse{}, coworkingCreatedResult.Err)
+	default:
+		return r.NewResult(responses.AddWorkspaceToCoworkingResponse{UUID: coworkingCreatedResult.Ok.Value.String()}, nil)
 	}
 }

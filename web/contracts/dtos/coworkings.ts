@@ -2,18 +2,12 @@
 // versions:
 //   protoc-gen-ts_proto  v1.176.0
 //   protoc               v3.12.4
-// source: dtos/coworking.proto
+// source: dtos/coworkings.proto
 
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "coworking_dto";
-
-export interface WorkspaceDTO {
-  UUID: string;
-  name: string;
-  seats: number;
-}
+export const protobufPackage = "dtos.coworking";
 
 export interface CoworkingDTO {
   UUID: string;
@@ -22,94 +16,11 @@ export interface CoworkingDTO {
   workspaces: WorkspaceDTO[];
 }
 
-function createBaseWorkspaceDTO(): WorkspaceDTO {
-  return { UUID: "", name: "", seats: 0 };
+export interface WorkspaceDTO {
+  UUID: string;
+  name: string;
+  seats: number;
 }
-
-export const WorkspaceDTO = {
-  encode(message: WorkspaceDTO, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.UUID !== "") {
-      writer.uint32(10).string(message.UUID);
-    }
-    if (message.name !== "") {
-      writer.uint32(18).string(message.name);
-    }
-    if (message.seats !== 0) {
-      writer.uint32(24).int32(message.seats);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): WorkspaceDTO {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseWorkspaceDTO();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.UUID = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.name = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.seats = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): WorkspaceDTO {
-    return {
-      UUID: isSet(object.UUID) ? globalThis.String(object.UUID) : "",
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      seats: isSet(object.seats) ? globalThis.Number(object.seats) : 0,
-    };
-  },
-
-  toJSON(message: WorkspaceDTO): unknown {
-    const obj: any = {};
-    if (message.UUID !== "") {
-      obj.UUID = message.UUID;
-    }
-    if (message.name !== "") {
-      obj.name = message.name;
-    }
-    if (message.seats !== 0) {
-      obj.seats = Math.round(message.seats);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<WorkspaceDTO>, I>>(base?: I): WorkspaceDTO {
-    return WorkspaceDTO.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<WorkspaceDTO>, I>>(object: I): WorkspaceDTO {
-    const message = createBaseWorkspaceDTO();
-    message.UUID = object.UUID ?? "";
-    message.name = object.name ?? "";
-    message.seats = object.seats ?? 0;
-    return message;
-  },
-};
 
 function createBaseCoworkingDTO(): CoworkingDTO {
   return { UUID: "", name: "", imagePath: [], workspaces: [] };
@@ -215,6 +126,95 @@ export const CoworkingDTO = {
     message.name = object.name ?? "";
     message.imagePath = object.imagePath?.map((e) => e) || [];
     message.workspaces = object.workspaces?.map((e) => WorkspaceDTO.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWorkspaceDTO(): WorkspaceDTO {
+  return { UUID: "", name: "", seats: 0 };
+}
+
+export const WorkspaceDTO = {
+  encode(message: WorkspaceDTO, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.UUID !== "") {
+      writer.uint32(10).string(message.UUID);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.seats !== 0) {
+      writer.uint32(24).int32(message.seats);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): WorkspaceDTO {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWorkspaceDTO();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.UUID = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.seats = reader.int32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WorkspaceDTO {
+    return {
+      UUID: isSet(object.UUID) ? globalThis.String(object.UUID) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      seats: isSet(object.seats) ? globalThis.Number(object.seats) : 0,
+    };
+  },
+
+  toJSON(message: WorkspaceDTO): unknown {
+    const obj: any = {};
+    if (message.UUID !== "") {
+      obj.UUID = message.UUID;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.seats !== 0) {
+      obj.seats = Math.round(message.seats);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WorkspaceDTO>, I>>(base?: I): WorkspaceDTO {
+    return WorkspaceDTO.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WorkspaceDTO>, I>>(object: I): WorkspaceDTO {
+    const message = createBaseWorkspaceDTO();
+    message.UUID = object.UUID ?? "";
+    message.name = object.name ?? "";
+    message.seats = object.seats ?? 0;
     return message;
   },
 };

@@ -2,7 +2,6 @@ package postgres
 
 import (
 	domain "api/coworkings/domain"
-	"api/utils/logger"
 	r "api/utils/result"
 	"errors"
 
@@ -27,10 +26,8 @@ func (repository *CoworkingRepositoryPostgres) SaveCoworking(coworking *domain.C
 	if result.Error == nil {
 		postgresCoworking.ID = existingCoworking.ID
 		postgresCoworking.CreatedAt = existingCoworking.CreatedAt
-		logger.GetLogger().Info("UPDATING", len(postgresCoworking.Images))
 		result = repository.db.Save(&postgresCoworking)
 	} else {
-		logger.GetLogger().Info("RECREATING", nil)
 		result = repository.db.Create(&postgresCoworking)
 	}
 

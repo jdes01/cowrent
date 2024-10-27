@@ -36,15 +36,16 @@ func (handler *AddImageToCoworkingHandler) Execute(request *requests.AddImageToC
 	}
 
 	newImage := domain.CoworkingImage{Name: request.ImageFilename, URL: uploaderResult.Ok}
-	coworkingResult.Ok.AddImage(newImage)
 
-	repositoryResult := handler.Repository.
-		SaveCoworking(&coworkingResult.Ok).
-		LogThisIfErr("Error saving the coworking")
+	go func(coworking *domain.Coworking, image *domain.CoworkingImage) {
+		coworking.AddImage(*image)
 
-	if repositoryResult.IsErr() {
-		return r.MapError[domain.Coworking, domain.CoworkingImage](repositoryResult)
-	}
+		handler.Repository.
+			SaveCoworking(coworking).
+			LogThisIfErr("Error saving the coworking")
+
+	}(&coworkingResult.Ok, &newImage)
 
 	return r.NewResult(newImage, nil)
+
 }

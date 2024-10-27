@@ -46,3 +46,13 @@ func AddImageToCoworkingMapper(context *gin.Context) result.Result[*requests.Add
 		ImageFilename: file.Filename,
 	}, nil)
 }
+
+
+func GetUrlCoworkingUUID(context *gin.Context) result.Result[string] {
+	coworkingUuid := context.Param("uuid")
+	if coworkingUuid == "" {
+		return result.NewResult("", errors.New("Missing coworking uuid"))
+	}
+
+	return result.NewResult(coworkingUuid, nil)
+}

@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "create_workspace_request";
+export const protobufPackage = "create_coworking_request";
 
 export interface CreateCoworkingRequestWorkspace {
   name: string;
@@ -85,7 +85,9 @@ export const CreateCoworkingRequestWorkspace = {
   create<I extends Exact<DeepPartial<CreateCoworkingRequestWorkspace>, I>>(base?: I): CreateCoworkingRequestWorkspace {
     return CreateCoworkingRequestWorkspace.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreateCoworkingRequestWorkspace>, I>>(object: I): CreateCoworkingRequestWorkspace {
+  fromPartial<I extends Exact<DeepPartial<CreateCoworkingRequestWorkspace>, I>>(
+    object: I,
+  ): CreateCoworkingRequestWorkspace {
     const message = createBaseCreateCoworkingRequestWorkspace();
     message.name = object.name ?? "";
     message.seats = object.seats ?? 0;

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package responses.coworkings;
+
+option go_package = "github.com/jdes01/cowrent/api/contracts/responses";
+
+
+message CreateWorkspaceResponse {
+    string UUID = 1;
+}
+
+message AddImageToCoworkingResponse {
+    string image_path = 1;
+}
+
+message AddWorkspaceToCoworkingResponse {
+    string UUID = 1;
+}
+
+message CreateCoworkingResponse {
+    string UUID = 1;
+}

@@ -10,7 +10,8 @@ import (
 func ConfigureCoworkingsRoutes(router *gin.RouterGroup, service coworkingService.CoworkingsService) {
 	router.Group("/coworking").
 		POST("", controllers.CreateCoworkingController(service)).
-		POST("/:uuid/image", controllers.AddImageToCoworkingController(service))
+		POST("/:uuid/image", controllers.AddImageToCoworkingController(service)).
+		POST("/:uuid/workspace", controllers.AddWorkspaceToCoworkingController(service))
 
 	router.Group("/coworkings").
 		GET("", controllers.GetCoworkingsController(service))

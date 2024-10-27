@@ -2,33 +2,33 @@
 // versions:
 //   protoc-gen-ts_proto  v1.176.0
 //   protoc               v3.12.4
-// source: responses/create-coworking.proto
+// source: responses/create-workspace.proto
 
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "create_coworking_response";
+export const protobufPackage = "create_workspace_response";
 
-export interface CreateCoworkingResponse {
+export interface CreateWorkspaceResponse {
   UUID: string;
 }
 
-function createBaseCreateCoworkingResponse(): CreateCoworkingResponse {
+function createBaseCreateWorkspaceResponse(): CreateWorkspaceResponse {
   return { UUID: "" };
 }
 
-export const CreateCoworkingResponse = {
-  encode(message: CreateCoworkingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const CreateWorkspaceResponse = {
+  encode(message: CreateWorkspaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.UUID !== "") {
       writer.uint32(10).string(message.UUID);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateCoworkingResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreateWorkspaceResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateCoworkingResponse();
+    const message = createBaseCreateWorkspaceResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -48,11 +48,11 @@ export const CreateCoworkingResponse = {
     return message;
   },
 
-  fromJSON(object: any): CreateCoworkingResponse {
+  fromJSON(object: any): CreateWorkspaceResponse {
     return { UUID: isSet(object.UUID) ? globalThis.String(object.UUID) : "" };
   },
 
-  toJSON(message: CreateCoworkingResponse): unknown {
+  toJSON(message: CreateWorkspaceResponse): unknown {
     const obj: any = {};
     if (message.UUID !== "") {
       obj.UUID = message.UUID;
@@ -60,11 +60,11 @@ export const CreateCoworkingResponse = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreateCoworkingResponse>, I>>(base?: I): CreateCoworkingResponse {
-    return CreateCoworkingResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<CreateWorkspaceResponse>, I>>(base?: I): CreateWorkspaceResponse {
+    return CreateWorkspaceResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreateCoworkingResponse>, I>>(object: I): CreateCoworkingResponse {
-    const message = createBaseCreateCoworkingResponse();
+  fromPartial<I extends Exact<DeepPartial<CreateWorkspaceResponse>, I>>(object: I): CreateWorkspaceResponse {
+    const message = createBaseCreateWorkspaceResponse();
     message.UUID = object.UUID ?? "";
     return message;
   },

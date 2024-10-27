@@ -1,15 +1,27 @@
 syntax = "proto3";
 
-package create_workspace_request;
+package requests.coworkings;
 
 option go_package = "github.com/jdes01/cowrent/api/contracts/requests";
+
+message AddImageToCoworkingRequest {
+    string coworking_uuid = 1;
+    bytes image_data = 2;
+    string image_filename = 3;
+}
 
 message CreateCoworkingRequestWorkspace {
     string name = 1;
     int32 seats = 2;
-  }
+}
 
 message CreateCoworkingRequest {
     string name = 1;
     repeated CreateCoworkingRequestWorkspace workspaces = 2;
-  }
+}
+
+message AddWorkspaceToCoworkingRequest {
+    string name = 1;
+    int32 seats = 2;
+    string coworking_uuid = 3;
+}

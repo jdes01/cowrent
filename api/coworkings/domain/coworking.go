@@ -58,3 +58,7 @@ func CreateNewCoworking(name string, workspaces []Workspace) r.Result[Coworking]
 func (coworking *Coworking) AddImage(image CoworkingImage) {
 	coworking.Images = append(coworking.Images, image)
 }
+
+func (coworking *Coworking) AddWorkspace(workspace Workspace) {
+	coworking.Workspaces = append(coworking.Workspaces, workspace)
+}
